@@ -1,14 +1,46 @@
 public class Inss {
-    Double DescontoInss, SalarioLiquido, Etapa1, Etapa2, Etapa3, Etapa4;
-    Etapa1 = 0.075;
-    Etapa2 = 0.09;
-    Etapa3 = 0.12;
+    Double descontoInss;
+    Double aliquota1 = 0.075;
+    Double aliquota2 = 0.09;
+    Double aliquota3 = 0.12;
+    Double aliquota4 = 0.14;
+    Double faixaSalarial1 = 1320.00;
+    Double faixaSalarial2 = 2571.29;
+    Double faixaSalarial3 = 3856.94;
+    
 
-    public Double CalcularInss(Double Salario){
+    public Double calcularDescontoInss(Double salario) {
 
-        if (Salario>=13200){
-              DescontoInss = ();
+        if (salario<=1320.00){
+            descontoInss = salario * aliquota1;
         }
 
+        else if(salario<=2571.29){
+            descontoInss = ((salario - faixaSalarial1) * aliquota2) + (faixaSalarial1 * aliquota1) ;
+        }
+
+        else if(salario<=3856.94){
+            descontoInss = ((salario - faixaSalarial2) * aliquota3) + (faixaSalarial1 * aliquota1) + (faixaSalarial2 * aliquota2) ;
+        }
+
+        else if(salario<=7507.49){
+            descontoInss = ((salario - faixaSalarial3) * aliquota3) + (faixaSalarial1 * aliquota1) + (faixaSalarial2 * aliquota2) + (faixaSalarial3 * aliquota3);
+        }
+
+        if((salario>=7507.5)||(descontoInss>876.95)){
+            descontoInss = 876.95;
+        }
+
+     return descontoInss;
+    }
+
+    public Double calcularInss(Double salario){
+    Inss desconto = new Inss();
+    Double salarioDescontado;
+
+        salarioDescontado = salario - desconto.calcularDescontoInss(salario);
+
+        return salarioDescontado;
     }
 }
+

@@ -1,5 +1,5 @@
 public class Funcionario {
-    String Nome, Cpf;
-    Double SalarioBruto ;
+    String nome, cpf;
+    Double salarioBruto, salarioLiquido;
 
 }
