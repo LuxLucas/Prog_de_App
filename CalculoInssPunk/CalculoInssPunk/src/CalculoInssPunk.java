@@ -1,4 +1,8 @@
 import java.util.Scanner;
+/*
+LUCAS FLORES DA 353 QUE FEZ. 
+  SE GOSTAR E PEGAR, PARABÉNS, VOCÊ ME DEVE ROYALTIES. $$$ 
+*/
 public class CalculoInssPunk {
     Integer confirmar;
     Scanner ler = new Scanner(System.in);
@@ -6,14 +10,15 @@ public class CalculoInssPunk {
     Inss inss = new Inss();
 
     public void recebeSalarioBruto(){
-        System.out.print("Digite o salario bruto: ");
+        System.out.print("DIGITE O SALÁRIO BRUTO: R$ ");
         while(!ler.hasNextDouble()){
-            System.out.println("[ERRO] Salário não aceito, por favor, repita.");
+            System.out.println("[ERRO] SALÁRIO NÃO ACEITO, POR FAVOR, REPITA.");
             System.out.println("");
-            System.out.print("Digite o salario bruto: ");
+            System.out.print("DIGITE O SALÁRIO BRUTO: R$ ");
             ler.next();
         }
         trab.salarioBruto = ler.nextDouble();
+        
     }
 
     public Boolean verificaLetra(String letra){
@@ -28,6 +33,7 @@ public class CalculoInssPunk {
     }
     public void receberNome(){
         String recebeChar = "";
+        String nomeRepete = null;
         char caracterChatAt;
         Integer tamanhoCaracter;
         int verificaAceitacao = 0;
@@ -35,11 +41,12 @@ public class CalculoInssPunk {
 
         while(verificaAceitacao == 0){
             problemaEncontrado = 0;
-
-            System.out.print("Nome do funcionário: ");
-            trab.nome = ler.nextLine();
-            trab.nome = trab.nome.toUpperCase();
+            System.out.println("");
+            System.out.print("NOME DO FUNCIONÁRIO: ");
+            nomeRepete = ler.next();
+            trab.nome = nomeRepete.toUpperCase();
             tamanhoCaracter = trab.nome.length();
+
             for(Integer contadorCaracter = 0;contadorCaracter<=tamanhoCaracter-1;
             contadorCaracter++){
                 caracterChatAt = trab.nome.charAt(contadorCaracter);
@@ -50,14 +57,13 @@ public class CalculoInssPunk {
                     problemaEncontrado = 1;
                 }
             }
-                if(problemaEncontrado == 1){
+                if((problemaEncontrado == 1)){
                     verificaAceitacao = 0;
                 }
                 if(problemaEncontrado!=0){
                     System.out.print("[ERRO] NOME NÃO ACEITO, POR FAVOR, REFAÇA.");
+                    System.out.println("");
                 }
-            System.out.println(" ");
-            System.out.println(" ");
         }
     }  
 
@@ -65,35 +71,74 @@ public class CalculoInssPunk {
         Double descontoDoInss = 0.0;
         Double salarioInteiro = 0.0;
         Double salarioRecebido = 0.0;
-        receberNome();
+
+            System.out.print("////////NOME//////////////////////////////////////////");
+            receberNome();
+            System.out.println("///////FIM NOME///////////////////////////////////////");
+            System.out.println("");
+
+            System.out.println("///////SALÁRIO BRUTO//////////////////////////////////");
             recebeSalarioBruto();
+            System.out.println("///////FIM SALÁRIO BRUTO//////////////////////////////");
             System.out.println("");
-            System.out.print("Funcionário: "+trab.nome);
 
-            System.out.println("");
+            System.out.println("///////MOSTRAR DADOS//////////////////////////////////");
+
+            System.out.println("FUNCIONÁRIO: "+trab.nome);
+
             salarioInteiro = trab.salarioBruto;
-            System.out.print("Salário bruto: R$ "+Math.round(salarioInteiro));
+            System.out.println("SALÁRIO BRUTO: R$ "+String.format("%,.2f",salarioInteiro));
 
-            System.out.println("");
             descontoDoInss = inss.calcularDescontoInss(trab.salarioBruto);
-            /*System.out.print("Desconto do INSS: R$ "+Math.round(descontoDoInss) );*/
-            System.out.print("Desconto do INSS: R$ "+descontoDoInss);
+            System.out.print("DESCONTO DO INSS: R$ "+String.format("%,.2f",descontoDoInss));
 
             System.out.println("");
             salarioRecebido = inss.calcularInss(trab.salarioBruto);
-            /*System.out.print("Salário líquido: "+Math.round(salarioRecebido));*/
-            System.out.print("Salário líquido: "+salarioRecebido);
+            System.out.println("SALÁRIO LÍQUIDO: R$ "+String.format("%,.2f",salarioRecebido));
+            System.out.print("///////FIM DO MOSTRAR DADOS///////////////////////////////////////");
+            System.out.println("");
+        }
+
+        public void comoProceder(){
+            Integer controleWith = 0;
+
+            while(controleWith == 0){
+                System.out.print("DESEJA CONTINUAR ? (1 = SIM || 2 = Não): ");
+                while(!ler.hasNextInt()){
+                    System.out.println("[ERRO] VALOR NÃO ACEITO, POR FAVOR, REPITA.");
+                    System.out.println("");
+                    System.out.print("DESEJA CONTINUAR ? (1 = SIM || 2 = Não): ");
+                    ler.next();
+                }
+                confirmar = ler.nextInt();
+                switch(confirmar){
+                    case 1:
+                        confirmar = 1;
+                        controleWith = 1;
+                    break;   
+                    case 2:
+                        confirmar = 2;
+                        controleWith = 2;
+                        System.out.println("");
+                        System.out.print("[AVISO] FIM DO PROGRAMA, TENHA UM BOM DIA");
+                    break;
+                    default:
+                        controleWith = 0;
+                        System.out.println("");
+                        System.out.print("[AVISO] RESPOSTA NÃO ACEITA");
+                    break;
+                }
+          }   
         }
 
     public static void main(String[] args){
     CalculoInssPunk programa = new CalculoInssPunk();
     programa.confirmar = 1;
         while(programa.confirmar==1){
+            System.out.println("");
             programa.mostraDados();
             System.out.println("");
-            System.out.println("");
-            System.out.println("Deseja continuar ? (1:Sim e qualquer outro:Não)");
-            programa.confirmar = programa.ler.nextInt();
-        }
+            programa.comoProceder();
+        }        
     }
 }
