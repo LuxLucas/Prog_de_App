@@ -1,51 +1,48 @@
 /*
 LUCAS FLORES DA 353 QUE FEZ. 
-  SE GOSTAR E PEGAR, PARABÉNS, VOCÊ ME DEVE ROYALTIES. $$$ 
+  SE GOSTAR E PEGAR, PARABÉNS, VOCÊ ME DEVE ROYALTIES. $$$
+  QUERO MEUS R$ 500,00 PRA ONTEM.
 */
 public class Inss {
-    Double descontoInss;
-    Double aliquota1 = 0.075;
-    Double aliquota2 = 0.09;
-    Double aliquota3 = 0.12;
-    Double aliquota4 = 0.14;
-    Double faixaSalarial1 = 1320.00;
-    Double faixaSalarial2 = 2571.29;
-    Double faixaSalarial3 = 3856.94;
-    
+    Double descontoInss = null;
+    Double[] aliquota = {0.075, 0.09, 0.12, 0.14};
+    Double[] faixaSalarialInss = {1320.00, 2571.29, 3856.94, 7507.49};
 
     public Double calcularDescontoInss(Double salario) {
-        if(salario > 7507.49){
-            salario = 7507.49;
+        Double[] descontoSequencialInss = new Double[3];
+        descontoSequencialInss[0] = (faixaSalarialInss[0] * aliquota[0]);
+        descontoSequencialInss[1] = ((faixaSalarialInss[1] - faixaSalarialInss[0]) * aliquota[1]);
+        descontoSequencialInss[2] = ((faixaSalarialInss[2] - faixaSalarialInss[1]) * aliquota[2]);
+
+
+        if(salario > faixaSalarialInss[3]){
+            salario = faixaSalarialInss[3];
         }
 
-        if (salario<=1320.00){
-            descontoInss = salario * aliquota1;
+        if (salario <= faixaSalarialInss[0]){
+            descontoInss = salario * aliquota[0];
         }
 
-        else if(salario<=2571.29){
-            descontoInss = ((salario - faixaSalarial1) * aliquota2);
+        else if(salario <= faixaSalarialInss[1]){
+            descontoInss = ((salario - faixaSalarialInss[0]) * aliquota[1]);
 
-            descontoInss += (faixaSalarial1 * aliquota1);
+            descontoInss += descontoSequencialInss[0];
         }
 
-        else if(salario<=3856.94){
-            descontoInss = ((salario - faixaSalarial2) * aliquota3);
+        else if(salario <= faixaSalarialInss[2]){
+            descontoInss = ((salario - faixaSalarialInss[1]) * aliquota[2]);
 
-            descontoInss += (faixaSalarial1 * aliquota1); 
-
-            descontoInss += ((faixaSalarial2 - faixaSalarial1) * aliquota2);
+            descontoInss += descontoSequencialInss[0];
+            descontoInss += descontoSequencialInss[1];
         }
 
-        else if(salario<=7507.49){
-            descontoInss = (salario - faixaSalarial3) * aliquota4;
+        else if(salario <= faixaSalarialInss[3]){
+            descontoInss = ((salario - faixaSalarialInss[2]) * aliquota[3]);
 
-            descontoInss += (faixaSalarial1 * aliquota1);
-            
-            descontoInss +=  ((faixaSalarial2 - faixaSalarial1) * aliquota2);
-
-            descontoInss += ((faixaSalarial3 - faixaSalarial2) * aliquota3);
+            descontoInss += descontoSequencialInss[0];
+            descontoInss += descontoSequencialInss[1];
+            descontoInss += descontoSequencialInss[2];
         }
-
      return descontoInss;
     }
 
@@ -54,7 +51,6 @@ public class Inss {
     Double salarioDescontado;
 
         salarioDescontado = salario - desconto.calcularDescontoInss(salario);
-
         return salarioDescontado;
     }
 }

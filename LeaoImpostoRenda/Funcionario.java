@@ -5,7 +5,9 @@ LUCAS FLORES DA 353 QUE FEZ.
 */
 public class Funcionario {
     Scanner ler = new Scanner(System.in);
-    String nome, cpf;
+    String nome;
+    String cpf;
+    Integer quantidadeDeDependentes;
     Double salarioBruto, salarioLiquido;
 
     
