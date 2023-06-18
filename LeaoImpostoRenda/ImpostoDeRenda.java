@@ -2,6 +2,7 @@ public class ImpostoDeRenda {
     Double[] faixaMaximaIr = {2112.00,2826.65, 3751.05, 4664.68};
     Double[] aliquotaImpostoDeRenda = {0.075, 0.15, 0.225, 0.275};
     Double[] valorDeduzirImpostoDeRenda = {158.40, 370.40, 651.73, 884.96};
+    Double custoImpostoDeRenda = null;
 
     public Double impostoRendaTradicional(Double salario, Integer dependentes, Double outrasDeducoes){
         Inss inss = new Inss();
@@ -29,7 +30,7 @@ public class ImpostoDeRenda {
         }else if(salarioLiquidoBase > faixaMaximaIr[3]){
             custoImpostoDeRendaTradicional = ((salarioLiquidoBase * aliquotaImpostoDeRenda[3]) - valorDeduzirImpostoDeRenda[3]);
         }
-        return custoImpostoDeRendaTradicional;
+        return custoImpostoDeRenda = custoImpostoDeRendaTradicional;
     }
 
     public Double impostoRendaSimplificado(Double salario){
@@ -55,7 +56,7 @@ public class ImpostoDeRenda {
         }else if(salarioLiquidoBase > faixaMaximaIr[3]){
             custoImpostoDeRendaSimplificado  = ((salarioLiquidoBase * aliquotaImpostoDeRenda[3]) - valorDeduzirImpostoDeRenda[3]);
         }
-        return custoImpostoDeRendaSimplificado;
+        return custoImpostoDeRenda = custoImpostoDeRendaSimplificado;
     }
 
 
